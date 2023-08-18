@@ -7,10 +7,12 @@ public class WumpusWorld {
 	private final String PIT = "pit";
 	private final String WUMPUS = "wumpus";
 
+	private int[] goldPosition;
 	private int[] wumpusPosition;
 
 	public void setSize(int i, int j) {
 		world = new String[i][j];
+		goldPosition = new int[2];
 		wumpusPosition = new int[2];
 	}
 
@@ -68,7 +70,9 @@ public class WumpusWorld {
 			return;
 		}
 
+		removeGold();
 		world[i][j] = GOLD;
+		saveGoldPosition(i, j);
 
 		System.out.println("Pone oro en la casilla " + "[" + i + "," + j + "]");
 		System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
@@ -125,6 +129,33 @@ public class WumpusWorld {
 		System.out.println("Pone un wumpus re loco en la casilla " + "[" + i + "," + j + "]");
 		System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
 		System.out.println();
+	}
+
+	/**
+	 * Almacena la posicion del oro
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	private void saveGoldPosition(int i, int j) {
+		goldPosition[0] = i;
+		goldPosition[1] = j;
+	}
+
+	/**
+	 * Elimina el unico oro que hay en el mundo, ya que solo
+	 * puede haber una ocurrencia del oro en el mundo
+	 * simultaneamente
+	 */
+	private void removeGold() {
+		String element = world[goldPosition[0]][goldPosition[1]];
+
+		if (element != null && element.equals(GOLD)) {
+			world[goldPosition[0]][goldPosition[1]] = "";
+			System.out.println("Oro eliminado de la casilla [" + goldPosition[0] + "," + goldPosition[1] + "]");
+			System.out.println("Contenido de la casilla [" + goldPosition[0] + "," + goldPosition[1] + "]: " + world[goldPosition[0]][goldPosition[1]]);
+		}
+
 	}
 
 	/**
