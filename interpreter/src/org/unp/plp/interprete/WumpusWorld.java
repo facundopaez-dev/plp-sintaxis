@@ -124,7 +124,7 @@ public class WumpusWorld {
 			return;
 		}
 
-		removeWumpus();
+		removeCurrentWumpus();
 		world[i][j] = WUMPUS;
 		saveWumpusPosition(i, j);
 
@@ -227,6 +227,38 @@ public class WumpusWorld {
 	}
 
 	/**
+	 * Elimina el wumpus de la casilla i,j del mundo Wumpus
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	public void removeWumpus(int i, int j) {
+
+		if (!worldExists()) {
+			printNonexistentWorldMessage();
+			return;
+		}
+
+		if (!boxExists(i, j)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		String element = world[i][j];
+
+		if (element != null) {
+			world[i][j] = EMPTY;
+			System.out.println("Wumpus re loco eliminado de la casilla " + "[" + i + "," + j + "]");
+			System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
+			System.out.println();
+			return;
+		}
+
+		System.out.println("No hay un wumpus re loco en la casilla " + "[" + i + "," + j + "]");
+		System.out.println();
+	}
+
+	/**
 	 * Almacena la posicion del oro
 	 * 
 	 * @param i
@@ -274,7 +306,7 @@ public class WumpusWorld {
 	 * Elimina el unico wumpus que hay en el mundo, ya que solo
 	 * puede haber un wumpus en el mundo simultaneamente
 	 */
-	private void removeWumpus() {
+	private void removeCurrentWumpus() {
 		String element = world[wumpusPosition[0]][wumpusPosition[1]];
 
 		/*

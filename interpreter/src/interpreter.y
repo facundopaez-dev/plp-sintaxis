@@ -67,6 +67,7 @@ put_stmt
 rem_stmt
   : REM rem_gold_stmt
   | REM rem_pit_stmt
+  | REM rem_wumpus_stmt
   ;
 
 // Reglas para colocar elementos en el mundo Wumpus
@@ -104,6 +105,12 @@ rem_gold_stmt
 rem_pit_stmt
   : PIT IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
     world.removePit((Integer) $4, (Integer) $6);
+    }
+  ;
+
+rem_wumpus_stmt
+  : WUMPUS IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
+    world.removeWumpus((Integer) $4, (Integer) $6);
     }
   ;
 
