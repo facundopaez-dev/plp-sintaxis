@@ -47,6 +47,10 @@ package org.unp.plp.interprete;
   return Parser.GOLD;
 }
 
+"pit" {
+  return Parser.PIT;
+}
+
 "in" {
   return Parser.IN;
 }
