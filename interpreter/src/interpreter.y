@@ -22,6 +22,7 @@
 %token GOLD
 %token PIT
 %token WUMPUS
+%token HERO
 
 %token IN
 %token LEFT_BRACKET
@@ -58,6 +59,7 @@ put_stmt
   : PUT put_gold_stmt
   | PUT put_pit_stmt
   | PUT put_wumpus_stmt
+  | PUT put_hero_stmt
   ;
 
 // Reglas para colocar elementos en el mundo Wumpus
@@ -76,6 +78,12 @@ put_pit_stmt
 put_wumpus_stmt
   : WUMPUS IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
     world.putWumpus((Integer) $4, (Integer) $6);
+    }
+  ;
+
+put_hero_stmt
+  : HERO IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
+    world.putHero((Integer) $4, (Integer) $6);
     }
   ;
 

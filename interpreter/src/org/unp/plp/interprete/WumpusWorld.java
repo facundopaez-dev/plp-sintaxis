@@ -6,6 +6,7 @@ public class WumpusWorld {
 	private final String GOLD = "gold";
 	private final String PIT = "pit";
 	private final String WUMPUS = "wumpus";
+	private final String HERO = "hero";
 
 	private int[] goldPosition;
 	private int[] wumpusPosition;
@@ -127,6 +128,31 @@ public class WumpusWorld {
 		saveWumpusPosition(i, j);
 
 		System.out.println("Pone un wumpus re loco en la casilla " + "[" + i + "," + j + "]");
+		System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
+		System.out.println();
+	}
+
+	/**
+	 * Coloca un heroe en la casilla [i,j] del mundo Wumpus
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	public void putHero(int i, int j) {
+
+		if (!worldExists()) {
+			printNonexistentWorldMessage();
+			return;
+		}
+
+		if (!boxExists(i, j)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		world[i][j] = HERO;
+
+		System.out.println("Pone un heroe en la casilla " + "[" + i + "," + j + "]");
 		System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
 		System.out.println();
 	}

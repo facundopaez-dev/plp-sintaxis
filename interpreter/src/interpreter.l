@@ -55,6 +55,10 @@ package org.unp.plp.interprete;
   return Parser.WUMPUS;
 }
 
+"hero" {
+  return Parser.HERO;
+}
+
 "in" {
   return Parser.IN;
 }
