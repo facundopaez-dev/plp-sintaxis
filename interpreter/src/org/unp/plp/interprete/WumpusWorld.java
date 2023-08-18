@@ -5,9 +5,13 @@ public class WumpusWorld {
 	private String[][] world;
 	private final String GOLD = "gold";
 	private final String PIT = "pit";
+	private final String WUMPUS = "wumpus";
+
+	private int[] wumpusPosition;
 
 	public void setSize(int i, int j) {
 		world = new String[i][j];
+		wumpusPosition = new int[2];
 	}
 
 	public int size() {
@@ -19,7 +23,7 @@ public class WumpusWorld {
 	 * @return true si el mundo Wumpus existe, false
 	 * en caso contrario
 	 */
-	public boolean worldExists() {
+	private boolean worldExists() {
 		return (world != null);
 	}
 
@@ -29,7 +33,7 @@ public class WumpusWorld {
 	 * @return true si la casilla existe en el mundo Wumpus,
 	 * false en caso contrario
 	 */
-	public boolean boxExists(int i, int j) {
+	private boolean boxExists(int i, int j) {
 
 		if (i < 0 || i > world.length - 1) {
 			return false;
@@ -94,6 +98,59 @@ public class WumpusWorld {
 		System.out.println("Pone un pozo en la casilla " + "[" + i + "," + j + "]");
 		System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
 		System.out.println();
+	}
+
+	/**
+	 * Coloca un wumpus en la casilla [i,j] del mundo Wumpus
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	public void putWumpus(int i, int j) {
+
+		if (!worldExists()) {
+			printNonexistentWorldMessage();
+			return;
+		}
+
+		if (!boxExists(i, j)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		removeWumpus();
+		world[i][j] = WUMPUS;
+		saveWumpusPosition(i, j);
+
+		System.out.println("Pone un wumpus re loco en la casilla " + "[" + i + "," + j + "]");
+		System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
+		System.out.println();
+	}
+
+	/**
+	 * Almacena la posicion de un wumpus
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	private void saveWumpusPosition(int i, int j) {
+		wumpusPosition[0] = i;
+		wumpusPosition[1] = j;
+	}
+
+	/**
+	 * Elimina el unico wumpus que hay en el mundo, ya que solo
+	 * puede haber un wumpus en el mundo simultaneamente
+	 */
+	private void removeWumpus() {
+		String element = world[wumpusPosition[0]][wumpusPosition[1]];
+
+		if (element != null && element.equals(WUMPUS)) {
+			world[wumpusPosition[0]][wumpusPosition[1]] = "";
+			System.out.println("Wumpus re loco eliminado de la casilla [" + wumpusPosition[0] + "," + wumpusPosition[1] + "]");
+			System.out.println("Contenido de la casilla [" + wumpusPosition[0] + "," + wumpusPosition[1] + "]: " + world[wumpusPosition[0]][wumpusPosition[1]]);
+		}
+
 	}
 
 	// **************************************************************

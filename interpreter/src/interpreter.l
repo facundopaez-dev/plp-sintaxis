@@ -51,6 +51,10 @@ package org.unp.plp.interprete;
   return Parser.PIT;
 }
 
+"wumpus" {
+  return Parser.WUMPUS;
+}
+
 "in" {
   return Parser.IN;
 }

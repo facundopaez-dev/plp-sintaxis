@@ -21,6 +21,7 @@
 // Tokens de los elementos de las operaciones put y rem
 %token GOLD
 %token PIT
+%token WUMPUS
 
 %token IN
 %token LEFT_BRACKET
@@ -56,6 +57,7 @@ world_stmt
 put_stmt
   : PUT put_gold_stmt
   | PUT pit_gold_stmt
+  | PUT put_wumpus_stmt
   ;
 
 // Reglas para colocar elementos en el mundo Wumpus
@@ -68,6 +70,12 @@ put_gold_stmt
 pit_gold_stmt
   : PIT IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
     world.putPit((Integer) $4, (Integer) $6);
+    }
+  ;
+
+put_wumpus_stmt
+  : WUMPUS IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
+    world.putWumpus((Integer) $4, (Integer) $6);
     }
   ;
 
