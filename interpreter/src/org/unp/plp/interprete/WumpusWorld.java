@@ -7,6 +7,7 @@ public class WumpusWorld {
 	private final String PIT = "pit";
 	private final String WUMPUS = "wumpus";
 	private final String HERO = "hero";
+	private final String EMPTY = "empty";
 
 	private int[] goldPosition;
 	private int[] wumpusPosition;
@@ -182,7 +183,7 @@ public class WumpusWorld {
 		String element = world[i][j];
 
 		if (element != null) {
-			world[i][j] = "";
+			world[i][j] = EMPTY;
 			System.out.println("Oro eliminado de la casilla " + "[" + i + "," + j + "]");
 			System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
 			System.out.println();
@@ -219,7 +220,7 @@ public class WumpusWorld {
 		 * posicion.
 		 */
 		if (element != null && element.equals(GOLD)) {
-			world[goldPosition[0]][goldPosition[1]] = "";
+			world[goldPosition[0]][goldPosition[1]] = EMPTY;
 			System.out.println("Oro eliminado de la casilla [" + goldPosition[0] + "," + goldPosition[1] + "]");
 			System.out.println("Contenido de la casilla [" + goldPosition[0] + "," + goldPosition[1] + "]: " + world[goldPosition[0]][goldPosition[1]]);
 		}
@@ -251,7 +252,7 @@ public class WumpusWorld {
 		 * posicion.
 		 */
 		if (element != null && element.equals(WUMPUS)) {
-			world[wumpusPosition[0]][wumpusPosition[1]] = "";
+			world[wumpusPosition[0]][wumpusPosition[1]] = EMPTY;
 			System.out.println("Wumpus re loco eliminado de la casilla [" + wumpusPosition[0] + "," + wumpusPosition[1] + "]");
 			System.out.println("Contenido de la casilla [" + wumpusPosition[0] + "," + wumpusPosition[1] + "]: " + world[wumpusPosition[0]][wumpusPosition[1]]);
 		}
