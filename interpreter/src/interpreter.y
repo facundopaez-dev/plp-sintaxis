@@ -14,6 +14,7 @@
 %token CONSTANT   // constante
 %token WORLD
 %token X
+%token PRINT_WORLD
 
 // Tokens de las operaciones
 %token PUT
@@ -44,6 +45,7 @@ statement_list
 statement
   : CONSTANT NL {System.out.println("constante: "+ $1); $$ = $1;}
   | world_stmt NL
+  | print_world_stmt NL
   | put_stmt NL
   | rem_stmt NL
   ;
@@ -54,6 +56,11 @@ world_stmt
     world.setSize((Integer) $2, (Integer) $4);
     System.out.println("Tamaño (casillas): " + $2 + "x" + $4 + " = " + world.size());
     System.out.println();
+    }
+
+print_world_stmt
+  : PRINT_WORLD {
+    world.print();
     }
 
 // Reglas de las operaciones put y rem

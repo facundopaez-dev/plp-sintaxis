@@ -291,6 +291,33 @@ public class WumpusWorld {
 	}
 
 	/**
+	 * Imprime el mundo Wumpus
+	 */
+	public void print() {
+
+		if (!worldExists()) {
+			printNonexistentWorldMessage();
+			return;
+		}
+
+		System.out.println("world," + world.length + "," + world[0].length);
+
+		for (int i = 0; i < world.length; i++) {
+
+			for (int j = 0; j < world[0].length; j++) {
+
+				if (world[i][j] != null) {
+					System.out.println(world[i][j] + "," + i + "," + j);
+				}
+
+			}
+
+		}
+
+		System.out.println();
+	}
+
+	/**
 	 * Almacena la posicion del oro
 	 * 
 	 * @param i

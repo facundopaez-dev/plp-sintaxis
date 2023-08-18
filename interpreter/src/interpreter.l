@@ -37,6 +37,10 @@ package org.unp.plp.interprete;
   return Parser.WORLD;
 }
 
+"print world" {
+  return Parser.PRINT_WORLD;
+}
+
 /** Operaciones put y rem **/
 "put" {
   return Parser.PUT;
