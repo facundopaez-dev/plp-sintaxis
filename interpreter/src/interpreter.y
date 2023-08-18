@@ -17,6 +17,7 @@
 
 // Tokens de las operaciones
 %token PUT
+%token REM
 
 // Tokens de los elementos de las operaciones put y rem
 %token GOLD
@@ -44,6 +45,7 @@ statement
   : CONSTANT NL {System.out.println("constante: "+ $1); $$ = $1;}
   | world_stmt NL
   | put_stmt NL
+  | rem_stmt NL
   ;
 
 world_stmt
@@ -60,6 +62,10 @@ put_stmt
   | PUT put_pit_stmt
   | PUT put_wumpus_stmt
   | PUT put_hero_stmt
+  ;
+
+rem_stmt
+  : REM rem_gold_stmt
   ;
 
 // Reglas para colocar elementos en el mundo Wumpus
@@ -88,6 +94,11 @@ put_hero_stmt
   ;
 
 // Reglas para eliminar elementos del mundo Wumpus
+rem_gold_stmt
+  : GOLD IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
+    world.removeGold((Integer) $4, (Integer) $6);
+    }
+  ;
 
 %%
 

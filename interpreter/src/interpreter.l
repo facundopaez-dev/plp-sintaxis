@@ -42,6 +42,10 @@ package org.unp.plp.interprete;
   return Parser.PUT;
 }
 
+"rem" {
+  return Parser.REM;
+}
+
 /** Elementos de las operaciones put y rem **/
 "gold" {
   return Parser.GOLD;

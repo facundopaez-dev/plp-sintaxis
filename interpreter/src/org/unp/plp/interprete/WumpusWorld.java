@@ -71,7 +71,7 @@ public class WumpusWorld {
 			return;
 		}
 
-		removeGold();
+		removeCurrentGold();
 		world[i][j] = GOLD;
 		saveGoldPosition(i, j);
 
@@ -157,6 +157,42 @@ public class WumpusWorld {
 		System.out.println();
 	}
 
+	// ***********************************************************
+	// Metodos para la eliminacion de elementos en el mundo Wumpus
+	// ***********************************************************
+
+	/**
+	 * Elimina el oro de la casilla i,j del mundo Wumpus
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	public void removeGold(int i, int j) {
+
+		if (!worldExists()) {
+			printNonexistentWorldMessage();
+			return;
+		}
+
+		if (!boxExists(i, j)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		String element = world[i][j];
+
+		if (element != null) {
+			world[i][j] = "";
+			System.out.println("Oro eliminado de la casilla " + "[" + i + "," + j + "]");
+			System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
+			System.out.println();
+			return;
+		}
+
+		System.out.println("No hay oro en la casilla " + "[" + i + "," + j + "]");
+		System.out.println();
+	}
+
 	/**
 	 * Almacena la posicion del oro
 	 * 
@@ -173,7 +209,7 @@ public class WumpusWorld {
 	 * puede haber una ocurrencia del oro en el mundo
 	 * simultaneamente
 	 */
-	private void removeGold() {
+	private void removeCurrentGold() {
 		String element = world[goldPosition[0]][goldPosition[1]];
 
 		/*
