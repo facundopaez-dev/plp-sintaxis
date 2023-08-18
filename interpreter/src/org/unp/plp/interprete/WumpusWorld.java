@@ -176,6 +176,12 @@ public class WumpusWorld {
 	private void removeGold() {
 		String element = world[goldPosition[0]][goldPosition[1]];
 
+		/*
+		 * Inicialmente el contenido de la posicion dada tiene
+		 * el valor null. Por lo tanto, es necesario realizar
+		 * este control antes de eliminar un elemento de dicha
+		 * posicion.
+		 */
 		if (element != null && element.equals(GOLD)) {
 			world[goldPosition[0]][goldPosition[1]] = "";
 			System.out.println("Oro eliminado de la casilla [" + goldPosition[0] + "," + goldPosition[1] + "]");
@@ -202,6 +208,12 @@ public class WumpusWorld {
 	private void removeWumpus() {
 		String element = world[wumpusPosition[0]][wumpusPosition[1]];
 
+		/*
+		 * Inicialmente el contenido de la posicion dada tiene
+		 * el valor null. Por lo tanto, es necesario realizar
+		 * este control antes de eliminar un elemento de dicha
+		 * posicion.
+		 */
 		if (element != null && element.equals(WUMPUS)) {
 			world[wumpusPosition[0]][wumpusPosition[1]] = "";
 			System.out.println("Wumpus re loco eliminado de la casilla [" + wumpusPosition[0] + "," + wumpusPosition[1] + "]");
