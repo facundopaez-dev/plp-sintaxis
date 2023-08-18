@@ -56,7 +56,7 @@ world_stmt
 // Reglas de las operaciones put y rem
 put_stmt
   : PUT put_gold_stmt
-  | PUT pit_gold_stmt
+  | PUT put_pit_stmt
   | PUT put_wumpus_stmt
   ;
 
@@ -67,7 +67,7 @@ put_gold_stmt
     }
   ;
 
-pit_gold_stmt
+put_pit_stmt
   : PIT IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
     world.putPit((Integer) $4, (Integer) $6);
     }
