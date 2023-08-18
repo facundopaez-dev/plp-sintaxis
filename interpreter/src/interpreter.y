@@ -12,7 +12,8 @@
 
 %token NL         // nueva línea
 %token CONSTANT   // constante
-
+%token WORLD
+%token X
 %%
 
 program
@@ -27,8 +28,16 @@ statement_list
 
 statement
   : CONSTANT NL {System.out.println("constante: "+ $1); $$ = $1;}
+  | world_stmt NL
   ;
 
+world_stmt
+  : WORLD CONSTANT "x" CONSTANT {
+    System.out.println("Mundo: " + $2 + " (filas) " + "x" + $4 + " (columnas)");
+    world.setSize((Integer) $2, (Integer) $4);
+    System.out.println("Tamaño (casillas): " + $2 + "x" + $4 + " = " + world.size());
+    System.out.println();
+    }
 
 %%
 

@@ -33,6 +33,10 @@ package org.unp.plp.interprete;
 
 %%
 
+"world" {
+  return Parser.WORLD;
+}
+
 [0-9]+
    {  yyparser.yylval = new Integer(yytext());
       return Parser.CONSTANT;
@@ -43,6 +47,13 @@ package org.unp.plp.interprete;
     yyline++ ;
     return Parser.NL;
   }
+
+[x] {
+  /** Deja pasar los caracteres unicos como literales **/
+  /** No es ninguna expresion regular, solo caracteres literales **/
+  yyparser.yylval = yytext();
+  return yytext().charAt(0);
+}
 
 [ \t]+ {  /** accion vacia: se ignoran los espacios y tabuladores **/
        }
