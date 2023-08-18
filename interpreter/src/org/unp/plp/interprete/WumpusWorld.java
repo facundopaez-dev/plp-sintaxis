@@ -190,7 +190,7 @@ public class WumpusWorld {
 			return;
 		}
 
-		System.out.println("No hay oro en la casilla " + "[" + i + "," + j + "]");
+		System.out.println("No hay ningun elemento en la casilla " + "[" + i + "," + j + "]");
 		System.out.println();
 	}
 
@@ -222,7 +222,7 @@ public class WumpusWorld {
 			return;
 		}
 
-		System.out.println("No hay un pozo en la casilla " + "[" + i + "," + j + "]");
+		System.out.println("No hay ningun elemento en la casilla " + "[" + i + "," + j + "]");
 		System.out.println();
 	}
 
@@ -254,7 +254,7 @@ public class WumpusWorld {
 			return;
 		}
 
-		System.out.println("No hay un wumpus re loco en la casilla " + "[" + i + "," + j + "]");
+		System.out.println("No hay ningun elemento en la casilla " + "[" + i + "," + j + "]");
 		System.out.println();
 	}
 
@@ -286,7 +286,7 @@ public class WumpusWorld {
 			return;
 		}
 
-		System.out.println("No hay un heroe en la casilla " + "[" + i + "," + j + "]");
+		System.out.println("No hay ningun elemento en la casilla " + "[" + i + "," + j + "]");
 		System.out.println();
 	}
 
