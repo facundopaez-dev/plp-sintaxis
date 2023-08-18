@@ -14,6 +14,17 @@
 %token CONSTANT   // constante
 %token WORLD
 %token X
+
+// Tokens de las operaciones
+%token PUT
+
+// Tokens de los elementos de las operaciones put y rem
+%token GOLD
+
+%token IN
+%token LEFT_BRACKET
+%token COMMA_SEPARATOR
+%token RIGHT_BRACKET
 %%
 
 program
@@ -29,15 +40,28 @@ statement_list
 statement
   : CONSTANT NL {System.out.println("constante: "+ $1); $$ = $1;}
   | world_stmt NL
+  | put_stmt NL
   ;
 
 world_stmt
   : WORLD CONSTANT "x" CONSTANT {
-    System.out.println("Mundo: " + $2 + " (filas) " + "x" + $4 + " (columnas)");
+    System.out.println("Mundo: " + $2 + " (filas) " + "x " + $4 + " (columnas)");
     world.setSize((Integer) $2, (Integer) $4);
     System.out.println("Tamaño (casillas): " + $2 + "x" + $4 + " = " + world.size());
     System.out.println();
     }
+
+// Reglas de las operaciones put y rem
+put_stmt
+  : PUT put_gold_stmt
+  ;
+
+// Reglas para los elementos de las operaciones
+put_gold_stmt
+  : GOLD IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
+    world.putGold((Integer) $4, (Integer) $6);
+    }
+  ;
 
 %%
 

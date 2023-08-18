@@ -37,6 +37,32 @@ package org.unp.plp.interprete;
   return Parser.WORLD;
 }
 
+/** Operaciones put y rem **/
+"put" {
+  return Parser.PUT;
+}
+
+/** Elementos de las operaciones put y rem **/
+"gold" {
+  return Parser.GOLD;
+}
+
+"in" {
+  return Parser.IN;
+}
+
+["["] {
+  return Parser.LEFT_BRACKET;
+}
+
+[","\t] {
+  return Parser.COMMA_SEPARATOR;
+}
+
+["]"] {
+  return Parser.RIGHT_BRACKET;
+}
+
 [0-9]+
    {  yyparser.yylval = new Integer(yytext());
       return Parser.CONSTANT;
