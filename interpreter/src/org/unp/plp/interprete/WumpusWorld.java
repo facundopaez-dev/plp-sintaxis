@@ -195,6 +195,38 @@ public class WumpusWorld {
 	}
 
 	/**
+	 * Elimina un pozo de la casilla i,j del mundo Wumpus
+	 * 
+	 * @param i
+	 * @param j
+	 */
+	public void removePit(int i, int j) {
+
+		if (!worldExists()) {
+			printNonexistentWorldMessage();
+			return;
+		}
+
+		if (!boxExists(i, j)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		String element = world[i][j];
+
+		if (element != null) {
+			world[i][j] = EMPTY;
+			System.out.println("Pozo eliminado de la casilla " + "[" + i + "," + j + "]");
+			System.out.println("Contenido de la casilla " + "[" + i + "," + j + "]: " + world[i][j]);
+			System.out.println();
+			return;
+		}
+
+		System.out.println("No hay un pozo en la casilla " + "[" + i + "," + j + "]");
+		System.out.println();
+	}
+
+	/**
 	 * Almacena la posicion del oro
 	 * 
 	 * @param i
