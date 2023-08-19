@@ -97,6 +97,11 @@ public class WumpusWorld {
 			return;
 		}
 
+		if (element.equals(WUMPUS)) {
+			removeWumpus(givenCoordinate);
+			return;
+		}
+
 	}
 
 	// **********************************************************
@@ -202,6 +207,23 @@ public class WumpusWorld {
 		}
 
 		world[givenCoordinate.row][givenCoordinate.column] = false;
+	}
+
+	/**
+	 * Elimina el wumpus del mundo, si la coordenada pertenece
+	 * al mundo Wumpus
+	 * 
+	 * @param givenCoordinate
+	 */
+	private void removeWumpus(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		wumpusCoordinate.row = -1;
+		wumpusCoordinate.column = -1;
 	}
 
 	/**
