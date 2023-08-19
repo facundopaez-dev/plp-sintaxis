@@ -34,6 +34,9 @@ public class WumpusWorld {
 	 */
 	public void print() {
 		System.out.println("world," + world.length + "," + world[0].length);
+		System.out.println(WUMPUS + "," + wumpusCoordinate.row + "," + wumpusCoordinate.column);
+		System.out.println(GOLD + "," + goldCoordinate.row + "," + goldCoordinate.column);
+		System.out.println(HERO + "," + heroCoordinate.row + "," + heroCoordinate.column);
 
 		for (int i = 0; i < world.length; i++) {
 
