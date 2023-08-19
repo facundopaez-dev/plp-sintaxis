@@ -102,6 +102,7 @@ public class WumpusWorld {
 			return;
 		}
 
+		removeHero(givenCoordinate);
 	}
 
 	// **********************************************************
@@ -224,6 +225,23 @@ public class WumpusWorld {
 
 		wumpusCoordinate.row = -1;
 		wumpusCoordinate.column = -1;
+	}
+
+	/**
+	 * Elimina el heroe del mundo, si la coordenada pertenece
+	 * al mundo Wumpus
+	 * 
+	 * @param givenCoordinate
+	 */
+	private void removeHero(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		heroCoordinate.row = -1;
+		heroCoordinate.column = -1;
 	}
 
 	/**
