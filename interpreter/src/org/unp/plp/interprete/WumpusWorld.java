@@ -25,6 +25,10 @@ public class WumpusWorld {
 		wumpusCoordinate = new Coordinate();
 	}
 
+	public int size() {
+		return (world.length * world[0].length);
+	}
+
 	/**
 	 * Imprime el mundo Wumpus
 	 */
@@ -72,21 +76,62 @@ public class WumpusWorld {
 
 	/**
 	 * Almacena la coordenada en la que se encuentra el oro en el
-	 * mundo Wumpus
+	 * mundo Wumpus, si la coordenada pertenece a dicho mundo
 	 * 
 	 * @param givenCoordinate
 	 */
 	private void putGold(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
 		goldCoordinate = givenCoordinate;
 	}
 
 	/**
-	 * Coloca un pozo en la coordenada dada del mundo Wumpus
+	 * Coloca un pozo en la coordenada dada del mundo Wumpus,
+	 * si la coordenada pertenece a dicho mundo
 	 * 
 	 * @param givenCoordinate
 	 */
 	private void putPit(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
 		world[givenCoordinate.row][givenCoordinate.column] = true;
+	}
+
+	/**
+	 * @param givenCoordinate
+	 * @return true si la casilla elegida existe, en caso
+	 * contrario false
+	 */
+	private boolean boxExists(Coordinate givenCoordinate) {
+
+		if (givenCoordinate.row < 0 || givenCoordinate.row > world.length - 1) {
+			return false;
+		}
+
+		if (givenCoordinate.column < 0 || givenCoordinate.column > world[0].length - 1) {
+			return false;
+		}
+
+		return true;
+	}
+
+	// **************************************************************
+	// Metodos para la impresion de mensajes ante entradas no validas
+	// **************************************************************
+
+	private void printNonexistentBoxMessage() {
+		System.out.println("La casilla elegida no existe");
+		System.out.println("El tamaño (casillas) del mundo " + "[0" + "-" + (world.length - 1) + "," + "0" + "-" + (world[0].length - 1) + "]" + " es: " + size());
+		System.out.println();
 	}
 
 }

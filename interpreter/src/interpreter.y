@@ -37,7 +37,7 @@ statement_list
   ;
 
 statement
-  : operation_stmt NL { System.out.println("Operacion ejecutada..."); System.out.println(); }
+  : operation_stmt NL
   | print_world_stmt NL
   | NL
   ;
