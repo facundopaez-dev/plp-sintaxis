@@ -46,16 +46,44 @@ public class WumpusWorld {
 		System.out.println();
 	}
 
+	/**
+	 * Coloca un elemento en el mundo wumpus
+	 * 
+	 * @param element
+	 * @param givenCoordinate
+	 */
+	public void put(String element, Coordinate givenCoordinate) {
+
+		if (element.equals(GOLD)) {
+			putGold(givenCoordinate);
+		}
+
+		if (element.equals(PIT)) {
+			putPit(givenCoordinate);
+		}
+
+	}
+
 	// **********************************************************
 	// Metodos para la colocacion de elementos en el mundo Wumpus
 	// **********************************************************
+
+	/**
+	 * Almacena la coordenada en la que se encuentra el oro en el
+	 * mundo Wumpus
+	 * 
+	 * @param givenCoordinate
+	 */
+	private void putGold(Coordinate givenCoordinate) {
+		goldCoordinate = givenCoordinate;
+	}
 
 	/**
 	 * Coloca un pozo en la coordenada dada del mundo Wumpus
 	 * 
 	 * @param givenCoordinate
 	 */
-	public void putPit(Coordinate givenCoordinate) {
+	private void putPit(Coordinate givenCoordinate) {
 		world[givenCoordinate.row][givenCoordinate.column] = true;
 	}
 
