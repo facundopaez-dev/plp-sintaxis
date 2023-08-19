@@ -5,6 +5,7 @@
   import java.io.*;
   import java.util.List;
   import java.util.ArrayList;
+  import org.unp.plp.interprete.Coordinate;
 %}
 
 
@@ -20,21 +21,14 @@
 %token PUT
 %token REM
 
-// Tokens de los elementos de las operaciones put y rem
-%token GOLD
-%token PIT
-%token WUMPUS
-%token HERO
-
+// Token para los elementos de las operaciones put y rem
+%token ELEMENT
 %token IN
-%token LEFT_BRACKET
-%token COMMA_SEPARATOR
-%token RIGHT_BRACKET
 %%
 
 program
-  : statement_list            // Lista de sentencias
-  |                           // Programa vacio
+  : world_stmt NL statement_list // Lista de sentencias
+  |                              // Programa vacio
   ;
 
 statement_list
@@ -43,89 +37,29 @@ statement_list
   ;
 
 statement
-  : CONSTANT NL {System.out.println("constante: "+ $1); $$ = $1;}
-  | world_stmt NL
+  : operation_stmt NL { System.out.println("Operacion ejecutada..."); System.out.println(); }
   | print_world_stmt NL
-  | put_stmt NL
-  | rem_stmt NL
+  | NL
   ;
 
 world_stmt
-  : WORLD CONSTANT "x" CONSTANT {
-    System.out.println("Mundo: " + $2 + " (filas) " + "x " + $4 + " (columnas)");
-    world.setSize((Integer) $2, (Integer) $4);
-    System.out.println("Tamaño (casillas): " + $2 + "x" + $4 + " = " + world.size());
-    System.out.println();
-    }
+  : WORLD CONSTANT "x" CONSTANT { world.create((Integer) $2, (Integer) $4); }
+  ;
 
 print_world_stmt
-  : PRINT_WORLD {
-    world.print();
-    }
+  : PRINT_WORLD { world.print(); }
 
 // Reglas de las operaciones put y rem
-put_stmt
-  : PUT put_gold_stmt
-  | PUT put_pit_stmt
-  | PUT put_wumpus_stmt
-  | PUT put_hero_stmt
+operation_stmt
+  : PUT ELEMENT IN coordinate { world.putPit((Coordinate) $4); }
   ;
 
-rem_stmt
-  : REM rem_gold_stmt
-  | REM rem_pit_stmt
-  | REM rem_wumpus_stmt
-  | REM rem_hero_stmt
+coordinate
+  : '[' CONSTANT ',' CONSTANT ']' { $$ = new Coordinate((Integer) $2, (Integer) $4); }
   ;
 
-// Reglas para colocar elementos en el mundo Wumpus
-put_gold_stmt
-  : GOLD IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.putGold((Integer) $4, (Integer) $6);
-    }
-  ;
-
-put_pit_stmt
-  : PIT IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.putPit((Integer) $4, (Integer) $6);
-    }
-  ;
-
-put_wumpus_stmt
-  : WUMPUS IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.putWumpus((Integer) $4, (Integer) $6);
-    }
-  ;
-
-put_hero_stmt
-  : HERO IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.putHero((Integer) $4, (Integer) $6);
-    }
-  ;
-
-// Reglas para eliminar elementos del mundo Wumpus
-rem_gold_stmt
-  : GOLD IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.removeGold((Integer) $4, (Integer) $6);
-    }
-  ;
-
-rem_pit_stmt
-  : PIT IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.removePit((Integer) $4, (Integer) $6);
-    }
-  ;
-
-rem_wumpus_stmt
-  : WUMPUS IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.removeWumpus((Integer) $4, (Integer) $6);
-    }
-  ;
-
-rem_hero_stmt
-  : HERO IN LEFT_BRACKET CONSTANT COMMA_SEPARATOR CONSTANT RIGHT_BRACKET {
-    world.removeHero((Integer) $4, (Integer) $6);
-    }
+coordinates
+  : '[' ']'
   ;
 
 %%

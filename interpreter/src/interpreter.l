@@ -52,35 +52,27 @@ package org.unp.plp.interprete;
 
 /** Elementos de las operaciones put y rem **/
 "gold" {
-  return Parser.GOLD;
+  yyparser.yylval = yytext();
+  return Parser.ELEMENT;
 }
 
 "pit" {
-  return Parser.PIT;
+  yyparser.yylval = yytext();
+  return Parser.ELEMENT;
 }
 
 "wumpus" {
-  return Parser.WUMPUS;
+  yyparser.yylval = yytext();
+  return Parser.ELEMENT;
 }
 
 "hero" {
-  return Parser.HERO;
+  yyparser.yylval = yytext();
+  return Parser.ELEMENT;
 }
 
 "in" {
   return Parser.IN;
-}
-
-["["] {
-  return Parser.LEFT_BRACKET;
-}
-
-[","\t] {
-  return Parser.COMMA_SEPARATOR;
-}
-
-["]"] {
-  return Parser.RIGHT_BRACKET;
 }
 
 [0-9]+
@@ -94,7 +86,7 @@ package org.unp.plp.interprete;
     return Parser.NL;
   }
 
-[x] {
+[x\[\],] {
   /** Deja pasar los caracteres unicos como literales **/
   /** No es ninguna expresion regular, solo caracteres literales **/
   yyparser.yylval = yytext();
