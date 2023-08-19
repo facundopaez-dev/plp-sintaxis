@@ -79,6 +79,21 @@ public class WumpusWorld {
 		putHero(givenCoordinate);
 	}
 
+	/**
+	 * Elimina un elemento del mundo wumpus
+	 * 
+	 * @param element
+	 * @param givenCoordinate
+	 */
+	public void rem(String element, Coordinate givenCoordinate) {
+
+		if (element.equals(GOLD)) {
+			removeGold(givenCoordinate);
+			return;
+		}
+
+	}
+
 	// **********************************************************
 	// Metodos para la colocacion de elementos en el mundo Wumpus
 	// **********************************************************
@@ -145,6 +160,27 @@ public class WumpusWorld {
 		}
 
 		heroCoordinate = givenCoordinate;
+	}
+
+	// **********************************************************
+	// Metodos para la eliminacion de elementos en el mundo Wumpus
+	// **********************************************************
+
+	/**
+	 * Elimina la coordenada en la que se encuentra el oro en el
+	 * mundo Wumpus, si la coordenada pertenece a dicho mundo
+	 * 
+	 * @param givenCoordinate
+	 */
+	private void removeGold(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		goldCoordinate.row = -1;
+		goldCoordinate.column = -1;
 	}
 
 	/**

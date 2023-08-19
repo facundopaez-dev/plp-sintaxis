@@ -6,7 +6,8 @@ public class Coordinate {
     public int column;
 
     public Coordinate() {
-
+        row = -1;
+        column = -1;
     }
 
     public Coordinate(int row, int column) {

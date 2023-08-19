@@ -52,6 +52,7 @@ print_world_stmt
 // Reglas de las operaciones put y rem
 operation_stmt
   : PUT ELEMENT IN coordinate { world.put((String) $2, (Coordinate) $4); }
+  | REM ELEMENT IN coordinate { world.rem((String) $2, (Coordinate) $4); }
   ;
 
 coordinate
