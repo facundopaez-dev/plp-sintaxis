@@ -56,10 +56,12 @@ public class WumpusWorld {
 
 		if (element.equals(GOLD)) {
 			putGold(givenCoordinate);
+			return;
 		}
 
 		if (element.equals(PIT)) {
 			putPit(givenCoordinate);
+			return;
 		}
 
 	}
