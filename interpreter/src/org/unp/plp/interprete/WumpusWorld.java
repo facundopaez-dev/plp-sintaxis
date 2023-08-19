@@ -4,8 +4,8 @@ public class WumpusWorld {
 
 	private boolean[][] world;
 	private Coordinate goldCoordinate;
-	private Coordinate heroCoordinate;
 	private Coordinate wumpusCoordinate;
+	private Coordinate heroCoordinate;
 	private final String GOLD = "gold";
 	private final String PIT = "pit";
 	private final String WUMPUS = "wumpus";
@@ -76,6 +76,7 @@ public class WumpusWorld {
 			return;
 		}
 
+		putHero(givenCoordinate);
 	}
 
 	// **********************************************************
@@ -128,6 +129,22 @@ public class WumpusWorld {
 		}
 
 		wumpusCoordinate = givenCoordinate;
+	}
+
+	/**
+	 * Almacena la coordenada del heroe, si la coordenada
+	 * pertenece al mundo Wumpus
+	 * 
+	 * @param givenCoordinate
+	 */
+	private void putHero(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		heroCoordinate = givenCoordinate;
 	}
 
 	/**
