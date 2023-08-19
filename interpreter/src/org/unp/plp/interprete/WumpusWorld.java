@@ -71,6 +71,11 @@ public class WumpusWorld {
 			return;
 		}
 
+		if (element.equals(WUMPUS)) {
+			putWumpus(givenCoordinate);
+			return;
+		}
+
 	}
 
 	// **********************************************************
@@ -107,6 +112,22 @@ public class WumpusWorld {
 		}
 
 		world[givenCoordinate.row][givenCoordinate.column] = true;
+	}
+
+	/**
+	 * Almacena la coordenada del Wumpus, si la coordenada
+	 * pertenece al mundo Wumpus
+	 * 
+	 * @param givenCoordinate
+	 */
+	private void putWumpus(Coordinate givenCoordinate) {
+
+		if (!boxExists(givenCoordinate)) {
+			printNonexistentBoxMessage();
+			return;
+		}
+
+		wumpusCoordinate = givenCoordinate;
 	}
 
 	/**
