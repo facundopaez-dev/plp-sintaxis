@@ -5,6 +5,7 @@
   import java.io.*;
   import java.util.List;
   import java.util.ArrayList;
+  import java.util.Set;
   import org.unp.plp.interprete.Coordinate;
 %}
 
@@ -13,6 +14,7 @@
 
 %token NL         // nueva línea
 %token CONSTANT   // constante
+%token VARIABLE
 %token WORLD
 %token X
 %token PRINT_WORLD
@@ -23,6 +25,7 @@
 
 // Token para los elementos de las operaciones put y rem
 %token ELEMENT
+%token PIT
 %token IN
 %%
 
@@ -39,6 +42,9 @@ statement_list
 statement
   : operation_stmt NL
   | print_world_stmt NL
+  | expr_cons NL { System.out.println("Expr_cons = " + $1); }
+  | expr_fila NL { System.out.println("Expr_fila = " + $1); }
+  | relacion_cons NL { System.out.println("Relacion_cons = " + $1); }
   | NL
   ;
 
@@ -52,6 +58,8 @@ print_world_stmt
 // Reglas de las operaciones put y rem
 operation_stmt
   : PUT ELEMENT IN coordinate { world.put((String) $2, (Coordinate) $4); }
+  | PUT PIT IN coordinate { world.putPit((String) $2, (Coordinate) $4); }
+  | PUT PIT IN coordinates { /* Se le pasa un conjunto de coordenadas */ }
   | REM ELEMENT IN coordinate { world.rem((String) $2, (Coordinate) $4); }
   ;
 
@@ -60,9 +68,99 @@ coordinate
   ;
 
 coordinates
-  : '[' ']'
+  : '[' ']' { $$ = new ArrayList<>(); }
+  | '[' rel_list ']' { /* Colocar un conjunto de coordenadas */ }
   ;
 
+rel_list
+  : rel
+  | rel ',' rel_list
+  ;
+
+//
+relacion_cons
+  : expr_fila '=''=' expr_cons { /* $$ = _world.esIgualFila((Set<Coordenada>)$1, (int)$4 ); */ }
+  | expr_cons '=''=' expr_fila { /* $$ = _world.esIgualFila((Set<Coordenada>)$4, (int)$1 ); */ }
+  ;
+
+// ************************************ Operaciones con filas ************************************
+expr_fila
+  : expr_fila '+' term_fila { $$ = world.joinSets((Set<Coordinate>) $1, (Set<Coordinate>) $3); }
+
+  | expr_fila '+' term_cons { $$ = world.addScalarToRow((int) $3, (Set<Coordinate>) $1); }
+  | expr_cons '+' term_fila { $$ = world.addScalarToRow((int) $1, (Set<Coordinate>) $3); }
+
+  | expr_fila '-' term_fila { $$ = world.subtractRow((int) $1, (Set<Coordinate>) $3); }
+
+  // i * constante
+  | factor_fila '*' factor_cons { $$ = world.multiplyRow((int) $3, (Set<Coordinate>) $1); }
+
+  // constante * i
+  | factor_cons '*' factor_fila  { $$ = world.multiplyRow((int) $1, (Set<Coordinate>) $3); }
+
+  // i / constante
+  | factor_fila '/' factor_cons { $$ = world.divisionRow((int) $3, (Set<Coordinate>) $1); }
+
+  | term_fila
+  ;
+
+term_fila
+  : term_fila '*' factor_fila { $$ = world.multiplyRow((int) $1, (Set<Coordinate>) $3); }
+  | term_fila '/' factor_fila { $$ = world.divisionRow((int) $1, (Set<Coordinate>) $3); }
+  | factor_fila
+  ;
+
+factor_fila
+  : VARIABLE { $$ = world.generateAllCoordinates(); } 
+  ;
+
+// *********************** Reglas para las operaciones con constantes ***********************
+expr_cons
+  : expr_cons '+' term_cons { $$ = (int) $1 + (int) $3; }
+  | expr_cons '-' term_cons { $$ = (int) $1 - (int) $3; }
+  | term_cons
+  ;
+
+term_cons
+  : term_cons '*' factor_cons { $$ = (int) $1 * (int) $3; }
+  | term_cons '/' factor_cons { $$ = (int) $1 / (int) $3; }
+  | factor_cons
+  ;
+
+factor_cons
+  : CONSTANT;
+
+/**
+rel
+  : arit_exp '=''=' arit_exp
+  | arit_exp '<' arit_exp
+  | arit_exp '>' arit_exp
+  | arit_exp '<''=' arit_exp
+  | arit_exp '>''=' arit_exp
+  ;
+**/
+
+//  : id
+//  | id arit_operator factor
+//  ;
+/**
+id
+ : CONSTANT { $$ = world.getSetCoord((int) 41); }
+ | VARIABLE { $$ = world.getSetCoord((char) 41); }
+ ;
+
+arit_operator
+  : '+'
+  | '-'
+  | '*'
+  | '/'
+  ;
+
+factor
+  : id
+  | arit_exp
+  ;
+**/
 %%
 
   /** referencia al analizador léxico

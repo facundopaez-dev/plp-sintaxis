@@ -58,7 +58,7 @@ package org.unp.plp.interprete;
 
 "pit" {
   yyparser.yylval = yytext();
-  return Parser.ELEMENT;
+  return Parser.PIT;
 }
 
 "wumpus" {
@@ -86,7 +86,12 @@ package org.unp.plp.interprete;
     return Parser.NL;
   }
 
-[x\[\],] {
+[ij] {
+  yyparser.yylval = yytext();
+  return Parser.VARIABLE;
+}
+
+[+\-*/\x\[\],] {
   /** Deja pasar los caracteres unicos como literales **/
   /** No es ninguna expresion regular, solo caracteres literales **/
   yyparser.yylval = yytext();

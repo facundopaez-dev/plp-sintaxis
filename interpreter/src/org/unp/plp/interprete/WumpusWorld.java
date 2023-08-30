@@ -1,5 +1,8 @@
 package org.unp.plp.interprete;
 
+import java.util.Set;
+import java.util.HashSet;
+
 public class WumpusWorld {
 
 	private boolean[][] world;
@@ -54,6 +57,102 @@ public class WumpusWorld {
 	}
 
 	/**
+	 * @return referencia a un objeto de tipo Set<Coordinate> que
+	 * contiene todas las coordenadas del mundo Wumpus. Esto es que
+	 * hace el producto cartesiano entre filas y columnas del mundo
+	 * Wumpus.
+	 */
+	public Set<Coordinate> generateAllCoordinates() {
+		Set<Coordinate> setCoordinates = new HashSet<>(); 
+
+		for (int i = 0; i < world.length; i++) {
+
+			for (int j = 0; j < world[0].length; j++) {
+				setCoordinates.add(new Coordinate(i, j));
+			}
+
+		}
+
+		return setCoordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return
+	 */
+	public Set<Coordinate> subtractRow(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.row = currentCoordinate.row - scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return
+	 */
+	public Set<Coordinate> multiplyRow(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.row = currentCoordinate.row * scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return
+	 */
+	public Set<Coordinate> divisionRow(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.row = currentCoordinate.row / scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene el
+	 * valor correspondiente a la fila de los pares resultante
+	 * de la suma entre la fila y un escalar
+	 */
+	public Set<Coordinate> addScalarToRow(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.row = currentCoordinate.row + scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * @param setOne
+	 * @param setTwo
+	 * @return referencia a un objeto de tipo Set que contiene
+	 * los elementos de un conjunto y de otro conjunto
+	 */
+	public Set<Coordinate> joinSets(Set<Coordinate> setOne, Set<Coordinate> setTwo) {
+		Set<Coordinate> unionSet = new HashSet<>();
+		unionSet.addAll(setOne);
+		unionSet.addAll(setTwo);
+
+		return unionSet;
+	}
+
+	/**
 	 * Coloca un elemento en el mundo wumpus
 	 * 
 	 * @param element
@@ -66,17 +165,27 @@ public class WumpusWorld {
 			return;
 		}
 
-		if (element.equals(PIT)) {
-			putPit(givenCoordinate);
-			return;
-		}
-
 		if (element.equals(WUMPUS)) {
 			putWumpus(givenCoordinate);
 			return;
 		}
 
 		putHero(givenCoordinate);
+	}
+
+	/**
+	 * Coloca un pozo en el mundo wumpus
+	 * 
+	 * @param element
+	 * @param givenCoordinate
+	 */
+	public void putPit(String element, Coordinate givenCoordinate) {
+
+		if (element.equals(PIT)) {
+			putPit(givenCoordinate);
+			return;
+		}
+
 	}
 
 	/**
