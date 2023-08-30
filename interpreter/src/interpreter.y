@@ -91,7 +91,7 @@ expr_fila
   | expr_fila '+' term_cons { $$ = world.addScalarToRow((int) $3, (Set<Coordinate>) $1); }
   | expr_cons '+' term_fila { $$ = world.addScalarToRow((int) $1, (Set<Coordinate>) $3); }
 
-  | expr_fila '-' term_fila { $$ = world.subtractRow((int) $1, (Set<Coordinate>) $3); }
+  | expr_fila '-' expr_cons { $$ = world.subtractRow((int) $3, (Set<Coordinate>) $1); }
 
   // i * constante
   | factor_fila '*' factor_cons { $$ = world.multiplyRow((int) $3, (Set<Coordinate>) $1); }
