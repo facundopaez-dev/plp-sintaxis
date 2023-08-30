@@ -4,7 +4,6 @@
 %{
   import java.io.*;
   import java.util.List;
-  import java.util.ArrayList;
   import java.util.Set;
   import org.unp.plp.interprete.Coordinate;
 %}
@@ -69,7 +68,7 @@ coordinate
   ;
 
 coordinates
-  : '[' ']' { $$ = new ArrayList<>(); }
+  : '[' ']'
   | '[' rel_list ']' { /* Colocar un conjunto de coordenadas */ }
   ;
 
