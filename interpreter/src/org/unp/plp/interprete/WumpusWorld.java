@@ -76,6 +76,12 @@ public class WumpusWorld {
 		return setCoordinates;
 	}
 
+	/*
+	 * **************************************
+	 * Metodos para las operaciones con filas
+	 * **************************************
+	 */
+
 	/**
 	 * 
 	 * @param scalar
@@ -133,6 +139,74 @@ public class WumpusWorld {
 
 		for (Coordinate currentCoordinate : coordinates) {
 			currentCoordinate.row = currentCoordinate.row + scalar;
+		}
+
+		return coordinates;
+	}
+
+	/*
+	 * *****************************************
+	 * Metodos para las operaciones con columnas
+	 * *****************************************
+	 */
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return
+	 */
+	public Set<Coordinate> subtractColumn(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.column = currentCoordinate.column - scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return
+	 */
+	public Set<Coordinate> multiplyColumn(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.column = currentCoordinate.column * scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return
+	 */
+	public Set<Coordinate> divisionColumn(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.column = currentCoordinate.column / scalar;
+		}
+
+		return coordinates;
+	}
+
+	/**
+	 * 
+	 * @param scalar
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene el
+	 * valor correspondiente a la fila de los pares resultante
+	 * de la suma entre la fila y un escalar
+	 */
+	public Set<Coordinate> addScalarToColumn(int scalar, Set<Coordinate> coordinates) {
+
+		for (Coordinate currentCoordinate : coordinates) {
+			currentCoordinate.column = currentCoordinate.column + scalar;
 		}
 
 		return coordinates;

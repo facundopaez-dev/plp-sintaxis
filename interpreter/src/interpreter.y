@@ -44,6 +44,7 @@ statement
   | print_world_stmt NL
   | expr_cons NL { System.out.println("Expr_cons = " + $1); }
   | expr_fila NL { System.out.println("Expr_fila = " + $1); }
+  | expr_col NL { System.out.println("Expr_columna = " + $1); }
   | relacion_cons NL { System.out.println("Relacion_cons = " + $1); }
   | NL
   ;
@@ -79,8 +80,8 @@ rel_list
 
 //
 relacion_cons
-  : expr_fila '=''=' expr_cons { /* $$ = _world.esIgualFila((Set<Coordenada>)$1, (int)$4 ); */ }
-  | expr_cons '=''=' expr_fila { /* $$ = _world.esIgualFila((Set<Coordenada>)$4, (int)$1 ); */ }
+  : expr_fila '=''=' expr_cons { }
+  | expr_cons '=''=' expr_fila { }
   ;
 
 // ************************************ Operaciones con filas ************************************
@@ -111,6 +112,37 @@ term_fila
   ;
 
 factor_fila
+  : VARIABLE { $$ = world.generateAllCoordinates(); } 
+  ;
+
+// ************************************ Operaciones con columnas ************************************
+expr_col
+  : expr_col '+' term_col { $$ = world.joinSets((Set<Coordinate>) $1, (Set<Coordinate>) $3); }
+
+  | expr_col '+' term_cons { $$ = world.addScalarToColumn((int) $3, (Set<Coordinate>) $1); }
+  | expr_cons '+' term_col { $$ = world.addScalarToColumn((int) $1, (Set<Coordinate>) $3); }
+
+  | expr_col '-' expr_cons { $$ = world.subtractColumn((int) $3, (Set<Coordinate>) $1); }
+
+  // j * constante
+  | factor_col '*' factor_cons { $$ = world.multiplyColumn((int) $3, (Set<Coordinate>) $1); }
+
+  // constante * j
+  | factor_cons '*' factor_col  { $$ = world.multiplyColumn((int) $1, (Set<Coordinate>) $3); }
+
+  // j / constante
+  | factor_col '/' factor_cons { $$ = world.divisionColumn((int) $3, (Set<Coordinate>) $1); }
+
+  | term_col
+  ;
+
+term_col
+  : term_col '*' factor_col { $$ = world.multiplyColumn((int) $1, (Set<Coordinate>) $3); }
+  | term_col '/' factor_col { $$ = world.divisionColumn((int) $1, (Set<Coordinate>) $3); }
+  | factor_col
+  ;
+
+factor_col
   : VARIABLE { $$ = world.generateAllCoordinates(); } 
   ;
 
