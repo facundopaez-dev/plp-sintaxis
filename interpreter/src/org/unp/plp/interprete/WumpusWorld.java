@@ -213,6 +213,106 @@ public class WumpusWorld {
 	}
 
 	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la fila es igual a una constante dada
+	 */
+	public Set<Coordinate> rowEqualToConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.row == constant) {
+				resultSet.add(currentCoordinate);
+			}
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la fila es estrictamente menor a una constante dada
+	 */
+	public Set<Coordinate> rowLessThanConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.row < constant) {
+				resultSet.add(currentCoordinate);
+			}
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la fila es estrictamente mayor a una constante dada
+	 */
+	public Set<Coordinate> rowGraterThanConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.row > constant) {
+				resultSet.add(currentCoordinate);
+			}
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la fila es menor o igual a una constante dada
+	 */
+	public Set<Coordinate> rowLessThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.row <= constant) {
+				resultSet.add(currentCoordinate);
+			}
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la fila es mayor o igual a una constante dada
+	 */
+	public Set<Coordinate> rowGraterThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.row >= constant) {
+				resultSet.add(currentCoordinate);
+			}
+		}
+
+		return resultSet;
+	}
+
+	/**
 	 * @param setOne
 	 * @param setTwo
 	 * @return referencia a un objeto de tipo Set que contiene

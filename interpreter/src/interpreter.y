@@ -41,9 +41,9 @@ statement_list
 statement
   : operation_stmt NL
   | print_world_stmt NL
-  | expr_cons NL { System.out.println("Expr_cons = " + $1); }
-  | expr_fila NL { System.out.println("Expr_fila = " + $1); }
-  | expr_col NL { System.out.println("Expr_columna = " + $1); }
+  /* | expr_cons NL { System.out.println("Expr_cons = " + $1); } */
+  /* | expr_fila NL { System.out.println("Expr_fila = " + $1); } */
+  /* | expr_col NL { System.out.println("Expr_columna = " + $1); } */
   | relacion_cons NL { System.out.println("Relacion_cons = " + $1); }
   | NL
   ;
@@ -77,10 +77,18 @@ rel_list
   | rel ',' rel_list
   ;
 
-//
+// ******************************** Reglas para las operaciones de comparacion ********************************
 relacion_cons
-  : expr_fila '=''=' expr_cons { }
-  | expr_cons '=''=' expr_fila { }
+  : expr_fila '=''=' expr_cons { $$ = world.rowEqualToConstant((int) $4, (Set<Coordinate>) $1); }
+  | expr_cons '=''=' expr_fila { $$ = world.rowEqualToConstant((int) $1, (Set<Coordinate>) $4); }
+  | expr_fila '<' expr_cons { $$ = world.rowLessThanConstant((int) $3, (Set<Coordinate>) $1); }
+  | expr_cons '<' expr_fila { $$ = world.rowGraterThanConstant((int) $1, (Set<Coordinate>) $3); }
+  | expr_fila '>' expr_cons { $$ = world.rowGraterThanConstant((int) $3, (Set<Coordinate>) $1); }
+  | expr_cons '>' expr_fila { $$ = world.rowLessThanConstant((int) $1, (Set<Coordinate>) $3); }
+  | expr_fila '<''=' expr_cons { $$ = world.rowLessThanOrEqualConstant((int) $4, (Set<Coordinate>) $1); }
+  | expr_cons '<''=' expr_fila { $$ = world.rowGraterThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
+  | expr_fila '>''=' expr_cons { $$ = world.rowGraterThanOrEqualConstant((int) $4, (Set<Coordinate>) $1); }
+  | expr_cons '>''=' expr_fila { $$ = world.rowLessThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
   ;
 
 // ************************************ Operaciones con filas ************************************

@@ -91,7 +91,7 @@ package org.unp.plp.interprete;
   return Parser.VARIABLE;
 }
 
-[+\-*/\x\[\],] {
+[\*x\+\[\]\-\/=\<\>] {
   /** Deja pasar los caracteres unicos como literales **/
   /** No es ninguna expresion regular, solo caracteres literales **/
   yyparser.yylval = yytext();
