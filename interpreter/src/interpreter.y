@@ -102,6 +102,20 @@ relacion_cons
   | expr_cons '>''=' expr_col { $$ = world.columnLessThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
   ;
 
+relaciones_comp_vars
+  : expr_fila '=''=' expr_col
+  | expr_fila '<' expr_col
+  | expr_fila '>' expr_col
+  | expr_fila '<''=' expr_col
+  | expr_fila '>''=' expr_col
+
+  | expr_col '=''=' expr_fila
+  | expr_col '<' expr_fila
+  | expr_col '>' expr_fila
+  | expr_col '<''=' expr_fila
+  | expr_col '>''=' expr_fila
+  ;
+
 // ************************************ Operaciones con filas ************************************
 expr_fila
   : expr_fila '+' term_fila { $$ = world.joinSets((Set<Coordinate>) $1, (Set<Coordinate>) $3); }
