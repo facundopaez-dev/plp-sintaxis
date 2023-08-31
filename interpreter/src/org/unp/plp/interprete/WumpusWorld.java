@@ -14,13 +14,6 @@ public class WumpusWorld {
 	private final String WUMPUS = "wumpus";
 	private final String HERO = "hero";
 
-	/*
-	 * Cosas a tener en cuenta:
-	 * - Cuando el wumpus se mueve se deben cambiar los mensajes (breeze, strench) adyacentes.
-	 * - El heroe y el wumpus se pueden mover, con lo cual se debe actualizar la posicion de estos personajes.
-	 * - El heroe comienza en la columna 0 y en la fila = fila - 1.
-	 */
-
 	public void create(int i, int j) {
 		world = new boolean[i][j];
 		goldCoordinate = new Coordinate();
@@ -58,12 +51,12 @@ public class WumpusWorld {
 
 	/**
 	 * @return referencia a un objeto de tipo Set<Coordinate> que
-	 * contiene todas las coordenadas del mundo Wumpus. Esto es que
-	 * hace el producto cartesiano entre filas y columnas del mundo
-	 * Wumpus.
+	 *         contiene todas las coordenadas del mundo Wumpus. Esto es que
+	 *         hace el producto cartesiano entre filas y columnas del mundo
+	 *         Wumpus.
 	 */
 	public Set<Coordinate> generateAllCoordinates() {
-		Set<Coordinate> setCoordinates = new HashSet<>(); 
+		Set<Coordinate> setCoordinates = new HashSet<>();
 
 		for (int i = 0; i < world.length; i++) {
 
@@ -83,10 +76,11 @@ public class WumpusWorld {
 	 */
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return
+	 * @return referencia a un objeto de tipo Set<Coordinate> que
+	 *         tiene coordenadas en las que el valor correspondiente a la
+	 *         fila es el resultado del valor de la fila menos un escalar
 	 */
 	public Set<Coordinate> subtractRow(int scalar, Set<Coordinate> coordinates) {
 
@@ -98,10 +92,11 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return
+	 * @return referencia a un objeto de tipo Set<Coordinate> que tiene
+	 *         coordenadas en las que el valor correspondiente a la fila es el
+	 *         resultado del valor de la fila mutiplicado por un escalar
 	 */
 	public Set<Coordinate> multiplyRow(int scalar, Set<Coordinate> coordinates) {
 
@@ -113,10 +108,11 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return
+	 * @return referencia a un objeto de tipo Set<Coordinate> que tiene
+	 *         coordenadas en las que el valor correspondiente a la fila
+	 *         es el resultado del valor de la fila dividido por un escalar
 	 */
 	public Set<Coordinate> divisionRow(int scalar, Set<Coordinate> coordinates) {
 
@@ -128,12 +124,11 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene el
-	 * valor correspondiente a la fila de los pares resultante
-	 * de la suma entre la fila y un escalar
+	 * @return referencia a un objeto de tipo Set<Coordinate> que tiene el
+	 *         valor correspondiente a la fila de las coordenadas resultante
+	 *         de la suma entre el valor de la fila y un escalar
 	 */
 	public Set<Coordinate> addScalarToRow(int scalar, Set<Coordinate> coordinates) {
 
@@ -151,10 +146,12 @@ public class WumpusWorld {
 	 */
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return
+	 * @return referencia a un objeto de tipo Set<Coordinate> que tiene
+	 *         el valor correspondiente a la columna de las coordenadas
+	 *         resultante de la resta entre el valor de la columna y un
+	 *         escalar
 	 */
 	public Set<Coordinate> subtractColumn(int scalar, Set<Coordinate> coordinates) {
 
@@ -166,10 +163,12 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return
+	 * @return referencia a un objeto de tipo Set<Coordinate> que tiene
+	 *         el valor correspondiente a la columna de las coordenadas
+	 *         resultante de la multiplicacion entre el valor de la columna
+	 *         y un escalar
 	 */
 	public Set<Coordinate> multiplyColumn(int scalar, Set<Coordinate> coordinates) {
 
@@ -181,10 +180,12 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return
+	 * @return referencia a un objeto de tipo Set<Coordinate> que tiene
+	 *         el valor correspondiente a la columna de las coordenadas
+	 *         resultante de la division entre el valor de la columna
+	 *         y un escalar
 	 */
 	public Set<Coordinate> divisionColumn(int scalar, Set<Coordinate> coordinates) {
 
@@ -196,12 +197,11 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * 
 	 * @param scalar
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene el
-	 * valor correspondiente a la fila de los pares resultante
-	 * de la suma entre la fila y un escalar
+	 * @return referencia a un objeto de tipo Set que tiene el valor
+	 *         correspondiente a la fila de las coordenadas resultante
+	 *         de la suma entre la fila y un escalar
 	 */
 	public Set<Coordinate> addScalarToColumn(int scalar, Set<Coordinate> coordinates) {
 
@@ -221,9 +221,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la fila es igual a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondientea la
+	 *         fila es igual a una constante dada
 	 */
 	public Set<Coordinate> rowEqualToConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -242,9 +242,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la fila es estrictamente menor a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         fila es estrictamente menor a una constante dada
 	 */
 	public Set<Coordinate> rowLessThanConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -263,9 +263,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la fila es estrictamente mayor a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         fila es estrictamente mayor a una constante dada
 	 */
 	public Set<Coordinate> rowGraterThanConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -285,8 +285,8 @@ public class WumpusWorld {
 	 * @param constant
 	 * @param coordinates
 	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la fila es menor o igual a una constante dada
+	 *         todas las coordenadas en las que el valor correspondiente
+	 *         a la fila es menor o igual a una constante dada
 	 */
 	public Set<Coordinate> rowLessThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -306,8 +306,8 @@ public class WumpusWorld {
 	 * @param constant
 	 * @param coordinates
 	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la fila es mayor o igual a una constante dada
+	 *         todas las coordenadas en las que el valor correspondiente
+	 *         a la fila es mayor o igual a una constante dada
 	 */
 	public Set<Coordinate> rowGraterThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -332,9 +332,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la columna es igual a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         columna es igual a una constante dada
 	 */
 	public Set<Coordinate> columnEqualToConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -353,9 +353,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la columna es estrictamente menor a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         columna es estrictamente menor a una constante dada
 	 */
 	public Set<Coordinate> columnLessThanConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -374,9 +374,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la columna es estrictamente mayor a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         columna es estrictamente mayor a una constante dada
 	 */
 	public Set<Coordinate> columnGraterThanConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -395,9 +395,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la columna es menor o igual a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         columna es menor o igual a una constante dada
 	 */
 	public Set<Coordinate> columnLessThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -416,9 +416,9 @@ public class WumpusWorld {
 	/**
 	 * @param constant
 	 * @param coordinates
-	 * @return referencia a un objeto de tipo Set que tiene
-	 * todas las coordenadas en las que el valor correspondiente
-	 * a la columna es mayor o igual a una constante dada
+	 * @return referencia a un objeto de tipo Set que tiene todas las
+	 *         coordenadas en las que el valor correspondiente a la
+	 *         columna es mayor o igual a una constante dada
 	 */
 	public Set<Coordinate> columnGraterThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
 		Set<Coordinate> resultSet = new HashSet<>();
@@ -438,7 +438,7 @@ public class WumpusWorld {
 	 * @param setOne
 	 * @param setTwo
 	 * @return referencia a un objeto de tipo Set que contiene
-	 * los elementos de un conjunto y de otro conjunto
+	 *         los elementos de un conjunto y de otro conjunto
 	 */
 	public Set<Coordinate> joinSets(Set<Coordinate> setOne, Set<Coordinate> setTwo) {
 		Set<Coordinate> unionSet = new HashSet<>();
@@ -673,7 +673,7 @@ public class WumpusWorld {
 	/**
 	 * @param givenCoordinate
 	 * @return true si la casilla elegida existe, en caso
-	 * contrario false
+	 *         contrario false
 	 */
 	private boolean boxExists(Coordinate givenCoordinate) {
 
@@ -694,7 +694,8 @@ public class WumpusWorld {
 
 	private void printNonexistentBoxMessage() {
 		System.out.println("La casilla elegida no existe");
-		System.out.println("El tamaño (casillas) del mundo " + "[0" + "-" + (world.length - 1) + "," + "0" + "-" + (world[0].length - 1) + "]" + " es: " + size());
+		System.out.println("El tamaño (casillas) del mundo " + "[0" + "-" + (world.length - 1) + "," + "0" + "-"
+				+ (world[0].length - 1) + "]" + " es: " + size());
 		System.out.println();
 	}
 
