@@ -212,6 +212,12 @@ public class WumpusWorld {
 		return coordinates;
 	}
 
+	/*
+	 * ****************************************
+	 * Metodos para las comparaciones con filas
+	 * ****************************************
+	 */
+
 	/**
 	 * @param constant
 	 * @param coordinates
@@ -227,6 +233,7 @@ public class WumpusWorld {
 			if (currentCoordinate.row == constant) {
 				resultSet.add(currentCoordinate);
 			}
+
 		}
 
 		return resultSet;
@@ -247,6 +254,7 @@ public class WumpusWorld {
 			if (currentCoordinate.row < constant) {
 				resultSet.add(currentCoordinate);
 			}
+
 		}
 
 		return resultSet;
@@ -267,6 +275,7 @@ public class WumpusWorld {
 			if (currentCoordinate.row > constant) {
 				resultSet.add(currentCoordinate);
 			}
+
 		}
 
 		return resultSet;
@@ -287,6 +296,7 @@ public class WumpusWorld {
 			if (currentCoordinate.row <= constant) {
 				resultSet.add(currentCoordinate);
 			}
+
 		}
 
 		return resultSet;
@@ -307,6 +317,118 @@ public class WumpusWorld {
 			if (currentCoordinate.row >= constant) {
 				resultSet.add(currentCoordinate);
 			}
+
+		}
+
+		return resultSet;
+	}
+
+	/*
+	 * *******************************************
+	 * Metodos para las comparaciones con columnas
+	 * *******************************************
+	 */
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la columna es igual a una constante dada
+	 */
+	public Set<Coordinate> columnEqualToConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.column == constant) {
+				resultSet.add(currentCoordinate);
+			}
+
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la columna es estrictamente menor a una constante dada
+	 */
+	public Set<Coordinate> columnLessThanConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.column < constant) {
+				resultSet.add(currentCoordinate);
+			}
+
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la columna es estrictamente mayor a una constante dada
+	 */
+	public Set<Coordinate> columnGraterThanConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.column > constant) {
+				resultSet.add(currentCoordinate);
+			}
+
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la columna es menor o igual a una constante dada
+	 */
+	public Set<Coordinate> columnLessThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.column <= constant) {
+				resultSet.add(currentCoordinate);
+			}
+
+		}
+
+		return resultSet;
+	}
+
+	/**
+	 * @param constant
+	 * @param coordinates
+	 * @return referencia a un objeto de tipo Set que tiene
+	 * todas las coordenadas en las que el valor correspondiente
+	 * a la columna es mayor o igual a una constante dada
+	 */
+	public Set<Coordinate> columnGraterThanOrEqualConstant(int constant, Set<Coordinate> coordinates) {
+		Set<Coordinate> resultSet = new HashSet<>();
+
+		for (Coordinate currentCoordinate : coordinates) {
+
+			if (currentCoordinate.column >= constant) {
+				resultSet.add(currentCoordinate);
+			}
+
 		}
 
 		return resultSet;

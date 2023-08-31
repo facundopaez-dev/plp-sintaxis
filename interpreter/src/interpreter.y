@@ -89,6 +89,17 @@ relacion_cons
   | expr_cons '<''=' expr_fila { $$ = world.rowGraterThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
   | expr_fila '>''=' expr_cons { $$ = world.rowGraterThanOrEqualConstant((int) $4, (Set<Coordinate>) $1); }
   | expr_cons '>''=' expr_fila { $$ = world.rowLessThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
+
+  | expr_col '=''=' expr_cons { $$ = world.columnEqualToConstant((int) $4, (Set<Coordinate>) $1); }
+  | expr_cons '=''=' expr_col { $$ = world.columnEqualToConstant((int) $1, (Set<Coordinate>) $4); }
+  | expr_col '<' expr_cons { $$ = world.columnLessThanConstant((int) $3, (Set<Coordinate>) $1); }
+  | expr_cons '<' expr_col { $$ = world.columnGraterThanConstant((int) $1, (Set<Coordinate>) $3); }
+  | expr_col '>' expr_cons { $$ = world.columnGraterThanConstant((int) $3, (Set<Coordinate>) $1); }
+  | expr_cons '>' expr_col { $$ = world.columnLessThanConstant((int) $1, (Set<Coordinate>) $3); }
+  | expr_col '<''=' expr_cons { $$ = world.columnLessThanOrEqualConstant((int) $4, (Set<Coordinate>) $1); }
+  | expr_cons '<''=' expr_col { $$ = world.columnGraterThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
+  | expr_col '>''=' expr_cons { $$ = world.columnGraterThanOrEqualConstant((int) $4, (Set<Coordinate>) $1); }
+  | expr_cons '>''=' expr_col { $$ = world.columnLessThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
   ;
 
 // ************************************ Operaciones con filas ************************************
@@ -119,7 +130,7 @@ term_fila
   ;
 
 factor_fila
-  : VARIABLE { $$ = world.generateAllCoordinates(); } 
+  : VARIABLE { $$ = world.generateAllCoordinates(); }
   ;
 
 // ************************************ Operaciones con columnas ************************************
