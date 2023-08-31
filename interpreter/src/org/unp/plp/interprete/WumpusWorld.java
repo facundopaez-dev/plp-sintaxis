@@ -547,6 +547,27 @@ public class WumpusWorld {
 	}
 
 	/**
+	 * Coloca pozos en base a un conjunto de coordenadas
+	 * 
+	 * @param givenCoordinates
+	 */
+	public void putPits(Set<Coordinate> givenCoordinates) {
+
+		for (Coordinate currentCoordinate : givenCoordinates) {
+
+			/*
+			 * Si existe la coordenada en el mapa del mundo
+			 * Wumpus, se coloca un pozo en esa coordenada
+			 */
+			if (boxExists(currentCoordinate)) {
+				world[currentCoordinate.row][currentCoordinate.column] = true;
+			}
+
+		}
+
+	}
+
+	/**
 	 * Almacena la coordenada del Wumpus, si la coordenada
 	 * pertenece al mundo Wumpus
 	 * 
