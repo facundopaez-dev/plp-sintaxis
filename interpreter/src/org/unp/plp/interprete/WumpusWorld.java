@@ -547,7 +547,7 @@ public class WumpusWorld {
 	}
 
 	/**
-	 * Coloca pozos en base a un conjunto de coordenadas
+	 * Coloca pozos en el mundo Wumpus en base a un conjunto de coordenadas
 	 * 
 	 * @param givenCoordinates
 	 */
@@ -561,6 +561,27 @@ public class WumpusWorld {
 			 */
 			if (boxExists(currentCoordinate)) {
 				world[currentCoordinate.row][currentCoordinate.column] = true;
+			}
+
+		}
+
+	}
+
+	/**
+	 * Elimina pozos del mundo Wumpus en base a un conjunto de coordenadas
+	 * 
+	 * @param givenCoordinates
+	 */
+	public void removePits(Set<Coordinate> givenCoordinates) {
+
+		for (Coordinate currentCoordinate : givenCoordinates) {
+
+			/*
+			 * Si existe la coordenada en el mapa del mundo
+			 * Wumpus, se elimina el pozo de esa coordenada
+			 */
+			if (boxExists(currentCoordinate)) {
+				world[currentCoordinate.row][currentCoordinate.column] = false;
 			}
 
 		}

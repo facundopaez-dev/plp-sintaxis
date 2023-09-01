@@ -61,6 +61,7 @@ operation_stmt
   : PUT ELEMENT IN coordinate { world.put((String) $2, (Coordinate) $4); }
   | PUT PIT IN coordinate { world.putPit((String) $2, (Coordinate) $4); }
   | PUT PIT IN coordinates { /* Se le pasa un conjunto de coordenadas */ }
+  | REM PIT IN coordinates { /* Se le pasa un conjunto de coordenadas */ }
   | REM ELEMENT IN coordinate { world.rem((String) $2, (Coordinate) $4); }
   ;
 
