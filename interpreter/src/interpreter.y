@@ -78,6 +78,11 @@ rel_list
   | rel ',' rel_list
   ;
 
+rel
+  : relacion_const
+  | relaciones_comp_vars
+  ;
+
 // ******************************** Reglas para las operaciones de comparacion ********************************
 // Regla para la comparacion entre filas y constantes, y entre columnas y constantes
 relacion_const
@@ -135,8 +140,6 @@ comp_columna_fila
   | expr_col '<''=' expr_fila
   | expr_col '>''=' expr_fila
   ;
-
-// Operaciones aritmeticas entre vars
 
 // ******************************* Reglas para las operacions con filas *******************************
 expr_fila
