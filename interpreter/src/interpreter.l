@@ -86,9 +86,14 @@ package org.unp.plp.interprete;
     return Parser.NL;
   }
 
-[ij] {
+[i] {
   yyparser.yylval = yytext();
-  return Parser.VARIABLE;
+  return Parser.VARIABLE_I;
+}
+
+[j] {
+  yyparser.yylval = yytext();
+  return Parser.VARIABLE_J;
 }
 
 [\*x\+\[\]\-\/=\<\>] {

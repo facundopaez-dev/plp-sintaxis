@@ -13,7 +13,8 @@
 
 %token NL         // nueva línea
 %token CONSTANT   // constante
-%token VARIABLE
+%token VARIABLE_I
+%token VARIABLE_J
 %token WORLD
 %token X
 %token PRINT_WORLD
@@ -41,10 +42,10 @@ statement_list
 statement
   : operation_stmt NL
   | print_world_stmt NL
-  /* | expr_cons NL { System.out.println("Expr_cons = " + $1); } */
-  /* | expr_fila NL { System.out.println("Expr_fila = " + $1); } */
-  /* | expr_col NL { System.out.println("Expr_columna = " + $1); } */
-  | relacion_cons NL { System.out.println("Relacion_cons = " + $1); }
+  | expr_cons NL { System.out.println("Expr_cons = " + $1); }
+  | expr_fila NL { System.out.println("Expr_fila = " + $1); }
+  | expr_col NL { System.out.println("Expr_columna = " + $1); }
+  | relacion_const NL { System.out.println("Relacion_cons = " + $1); }
   | NL
   ;
 
@@ -78,7 +79,14 @@ rel_list
   ;
 
 // ******************************** Reglas para las operaciones de comparacion ********************************
-relacion_cons
+// Regla para la comparacion entre filas y constantes, y entre columnas y constantes
+relacion_const
+  : comp_fila_const
+  | comp_columna_const
+  ;
+
+// Reglas para la comparacion fila-constante
+comp_fila_const
   : expr_fila '=''=' expr_cons { $$ = world.rowEqualToConstant((int) $4, (Set<Coordinate>) $1); }
   | expr_cons '=''=' expr_fila { $$ = world.rowEqualToConstant((int) $1, (Set<Coordinate>) $4); }
   | expr_fila '<' expr_cons { $$ = world.rowLessThanConstant((int) $3, (Set<Coordinate>) $1); }
@@ -89,8 +97,11 @@ relacion_cons
   | expr_cons '<''=' expr_fila { $$ = world.rowGraterThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
   | expr_fila '>''=' expr_cons { $$ = world.rowGraterThanOrEqualConstant((int) $4, (Set<Coordinate>) $1); }
   | expr_cons '>''=' expr_fila { $$ = world.rowLessThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
+  ;
 
-  | expr_col '=''=' expr_cons { $$ = world.columnEqualToConstant((int) $4, (Set<Coordinate>) $1); }
+// Reglas para la comparacion columna-constante
+comp_columna_const
+  : expr_col '=''=' expr_cons { $$ = world.columnEqualToConstant((int) $4, (Set<Coordinate>) $1); }
   | expr_cons '=''=' expr_col { $$ = world.columnEqualToConstant((int) $1, (Set<Coordinate>) $4); }
   | expr_col '<' expr_cons { $$ = world.columnLessThanConstant((int) $3, (Set<Coordinate>) $1); }
   | expr_cons '<' expr_col { $$ = world.columnGraterThanConstant((int) $1, (Set<Coordinate>) $3); }
@@ -102,21 +113,32 @@ relacion_cons
   | expr_cons '>''=' expr_col { $$ = world.columnLessThanOrEqualConstant((int) $1, (Set<Coordinate>) $4); }
   ;
 
+// Regla para la comparacion entre filas y columnas, y viceversa
 relaciones_comp_vars
+  : comp_fila_columna
+  | comp_columna_fila
+  ;
+
+// Reglas para la comparacion fila-columna
+comp_fila_columna
   : expr_fila '=''=' expr_col
   | expr_fila '<' expr_col
   | expr_fila '>' expr_col
   | expr_fila '<''=' expr_col
   | expr_fila '>''=' expr_col
 
-  | expr_col '=''=' expr_fila
+// Reglas para la comparacion columna-fila
+comp_columna_fila
+  : expr_col '=''=' expr_fila
   | expr_col '<' expr_fila
   | expr_col '>' expr_fila
   | expr_col '<''=' expr_fila
   | expr_col '>''=' expr_fila
   ;
 
-// ************************************ Operaciones con filas ************************************
+// Operaciones aritmeticas entre vars
+
+// ******************************* Reglas para las operacions con filas *******************************
 expr_fila
   : expr_fila '+' term_fila { $$ = world.joinSets((Set<Coordinate>) $1, (Set<Coordinate>) $3); }
 
@@ -144,10 +166,10 @@ term_fila
   ;
 
 factor_fila
-  : VARIABLE { $$ = world.generateAllCoordinates(); }
+  : VARIABLE_I { $$ = world.generateAllCoordinates(); }
   ;
 
-// ************************************ Operaciones con columnas ************************************
+// **************************** Reglas para las operaciones con columnas ****************************
 expr_col
   : expr_col '+' term_col { $$ = world.joinSets((Set<Coordinate>) $1, (Set<Coordinate>) $3); }
 
@@ -175,7 +197,7 @@ term_col
   ;
 
 factor_col
-  : VARIABLE { $$ = world.generateAllCoordinates(); } 
+  : VARIABLE_J { $$ = world.generateAllCoordinates(); } 
   ;
 
 // *********************** Reglas para las operaciones con constantes ***********************
@@ -194,37 +216,6 @@ term_cons
 factor_cons
   : CONSTANT;
 
-/**
-rel
-  : arit_exp '=''=' arit_exp
-  | arit_exp '<' arit_exp
-  | arit_exp '>' arit_exp
-  | arit_exp '<''=' arit_exp
-  | arit_exp '>''=' arit_exp
-  ;
-**/
-
-//  : id
-//  | id arit_operator factor
-//  ;
-/**
-id
- : CONSTANT { $$ = world.getSetCoord((int) 41); }
- | VARIABLE { $$ = world.getSetCoord((char) 41); }
- ;
-
-arit_operator
-  : '+'
-  | '-'
-  | '*'
-  | '/'
-  ;
-
-factor
-  : id
-  | arit_exp
-  ;
-**/
 %%
 
   /** referencia al analizador léxico
