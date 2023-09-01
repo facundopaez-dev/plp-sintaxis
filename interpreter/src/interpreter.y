@@ -42,10 +42,10 @@ statement_list
 statement
   : operation_stmt NL
   | print_world_stmt NL
-  | expr_cons NL { System.out.println("Expr_cons = " + $1); }
+  /* | expr_cons NL { System.out.println("Expr_cons = " + $1); }
   | expr_fila NL { System.out.println("Expr_fila = " + $1); }
   | expr_col NL { System.out.println("Expr_columna = " + $1); }
-  | relacion_const NL { System.out.println("Relacion_cons = " + $1); }
+  | relacion_const NL { System.out.println("Relacion_cons = " + $1); } */
   | NL
   ;
 
@@ -81,7 +81,7 @@ rel_list
 
 rel
   : relacion_const
-  | relaciones_comp_vars
+  | relacion_comp_vars
   ;
 
 // ******************************** Reglas para las operaciones de comparacion ********************************
@@ -120,7 +120,7 @@ comp_columna_const
   ;
 
 // Regla para la comparacion entre filas y columnas, y viceversa
-relaciones_comp_vars
+relacion_comp_vars
   : comp_fila_columna
   | comp_columna_fila
   ;
