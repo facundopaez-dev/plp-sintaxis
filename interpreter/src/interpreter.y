@@ -160,6 +160,9 @@ expr_fila
   // i / constante
   | factor_fila '/' factor_cons { $$ = world.divisionRow((int) $3, (Set<Coordinate>) $1); }
 
+  // constante / i
+  | factor_cons '/' factor_fila { $$ = world.divisionRow((int) $1, (Set<Coordinate>) $3); }
+
   | term_fila
   ;
 
@@ -190,6 +193,9 @@ expr_col
 
   // j / constante
   | factor_col '/' factor_cons { $$ = world.divisionColumn((int) $3, (Set<Coordinate>) $1); }
+
+  // constante / j
+  | factor_cons '/' factor_col { $$ = world.divisionColumn((int) $1, (Set<Coordinate>) $3); }
 
   | term_col
   ;
